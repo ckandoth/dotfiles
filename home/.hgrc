@@ -2,6 +2,3 @@
 username = Cyriac Kandoth <ckandoth@gmail.com>
 editor = vim
 verbose = false
-
-[trusted]
-groups = cslab

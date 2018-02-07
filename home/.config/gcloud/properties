@@ -1,8 +1,0 @@
-[core]
-account = cyriac.kandoth@gmail.com
-project = carbon-quanta-777
-
-[compute]
-region = us-central1
-zone = us-central1-b
-

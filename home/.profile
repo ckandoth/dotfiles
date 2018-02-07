@@ -15,7 +15,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
+# Set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
 fi
@@ -48,4 +48,17 @@ if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT=$HOME/.pyenv
     export PATH=$PYENV_ROOT/bin:$PATH
     eval "$(pyenv init -)"
+fi
+
+# Configure Roslin, if its settings are found in the expected folder
+if [ -f "/ifs/work/pi/roslin-core/2.0.0/config/settings.sh" ]; then
+    source /ifs/work/pi/roslin-core/2.0.0/config/settings.sh
+    export PATH=${ROSLIN_CORE_BIN_PATH}:$PATH
+    export TOIL_LSF_ARGS="-sla Haystack -S 1"
+fi
+
+# Use scratch as tmp if found
+if [ -d "/scratch/kandoth" ]; then
+    export TMP=/scratch/kandoth
+    export TMPDIR=/scratch/kandoth
 fi
