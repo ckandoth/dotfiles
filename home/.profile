@@ -1,64 +1,49 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
+# ~/.profile is executed by the command interpreter (e.g. bash) for login shells. It has the stuff
+# *not* specifically related to bash, such as environment variables (e.g. PATH, PERL5LIB, etc.)
 
-# Override the default umask with something that's friendlier to your lab mates
+# Set umask so that your group members can help you with your work
 umask 002
 
-# if running bash
+# If running bash, load .bashrc
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
         . "$HOME/.bashrc"
     fi
 fi
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
-fi
-if [ -d "$HOME/.local/bin" ]; then
-    PATH=:"$PATH:$HOME/.local/bin"
-fi
-
 # Set PATH to include MSKCC's private bin if found
 if [ -d "/opt/common/CentOS_6-dev/bin/current" ]; then
-    PATH="/opt/common/CentOS_6-dev/bin/current:$PATH"
+    export PATH=/opt/common/CentOS_6-dev/bin/current:$PATH
 fi
 
 # Set PATH to include MSKCC's python bin if found
 if [ -d "/opt/common/CentOS_6-dev/python/python-2.7.10/bin" ]; then
-    PATH="/opt/common/CentOS_6-dev/python/python-2.7.10/bin:$PATH"
+    export PATH=/opt/common/CentOS_6-dev/python/python-2.7.10/bin:$PATH
 fi
 
-# Add local Perl libraries to $PERL5LIB if found
-if [ -d "$HOME/perl5" ]; then
-    export PERL5LIB="$HOME/perl5/lib/perl5:$HOME/perl5/lib/perl5/site_perl"
-fi
-
-# Set up Perlbrew if found in the expected folder
-if [ -d "$HOME/perl5/perlbrew" ]; then
-    source $HOME/perl5/perlbrew/etc/bashrc
-fi
-
-# Set up Pyenv if found in the expected folder
-if [ -d "$HOME/.pyenv" ]; then
-    export PYENV_ROOT=$HOME/.pyenv
-    export PATH=$PYENV_ROOT/bin:$PATH
-    eval "$(pyenv init -)"
-fi
-
-# Configure Roslin, if its settings are found in the expected folder
-if [ -f "/ifs/work/pi/roslin-core/2.0.0/config/settings.sh" ]; then
-    source /ifs/work/pi/roslin-core/2.0.0/config/settings.sh
+# Configure Roslin, if its settings are found in the expected folders
+if [ -f "/ifs/work/pi/roslin-core/2.0.2/config/settings.sh" ]; then
+    source /ifs/work/pi/roslin-core/2.0.2/config/settings.sh
+    source /ifs/work/pi/roslin-core/2.0.2/config/variant/2.2.0/settings.sh
     export PATH=${ROSLIN_CORE_BIN_PATH}:$PATH
     export TOIL_LSF_ARGS="-sla Haystack -S 1"
 fi
 
-# Use scratch as tmp if found
-if [ -d "/scratch/kandoth" ]; then
-    export TMP=/scratch/kandoth
-    export TMPDIR=/scratch/kandoth
+# Use /scratch/username instead of /tmp if /scratch disk is found
+if [ -d "/scratch" ]; then
+    mkdir -p /scratch/$USER
+    export TMP=/scratch/$USER
+    export TMPDIR=/scratch/$USER
+fi
+
+# Reference newer gcc libraries if found
+if [ -d "/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64" ]; then
+    export LD_LIBRARY_PATH=/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64:$LD_LIBRARY_PATH
+fi
+
+# Load NVM and bash completion if found
+if [ -d "/opt/common/CentOS_6-dev/nvm/v0.33.9" ]; then
+    export NVM_DIR=/opt/common/CentOS_6-dev/nvm/v0.33.9
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
