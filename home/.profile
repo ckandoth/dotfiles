@@ -38,7 +38,7 @@ fi
 
 # Reference newer gcc libraries if found
 if [ -d "/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64" ]; then
-    export LD_LIBRARY_PATH=/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64
 fi
 
 # Load NVM and bash completion if found
