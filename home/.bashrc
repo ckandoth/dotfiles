@@ -77,6 +77,16 @@ set -o noclobber
 # Some customized parameters for the less command
 export LESS=-eiMXR
 
+# Set umask so that your group members can help you with your work
+umask 002
+
+# Use /scratch/username instead of /tmp if /scratch disk is found
+if [ -d "/scratch" ]; then
+    mkdir -p /scratch/$USER
+    export TMP=/scratch/$USER
+    export TMPDIR=/scratch/$USER
+fi
+
 # A function that sources all .sh files within a given directory
 function load_dir {
     LOAD_DIR=${1}
@@ -105,4 +115,34 @@ fi
 # Source the Homeshick scripts, and make sure all the castles are synced up
 if [ -d "$HOME/.homesick/repos/homeshick" ]; then
     source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+fi
+
+# Set PATH to include MSKCC's private bin if found
+if [ -d "/opt/common/CentOS_6-dev/bin/current" ]; then
+    export PATH=/opt/common/CentOS_6-dev/bin/current:$PATH
+fi
+
+# Set PATH to include MSKCC's python bin if found
+if [ -d "/opt/common/CentOS_6-dev/python/python-2.7.10/bin" ]; then
+    export PATH=/opt/common/CentOS_6-dev/python/python-2.7.10/bin:$PATH
+fi
+
+# Configure Roslin, if its settings are found in the expected folders
+if [ -f "/ifs/work/pi/roslin-core/2.0.3/config/settings.sh" ]; then
+    source /ifs/work/pi/roslin-core/2.0.3/config/settings.sh
+    source /ifs/work/pi/roslin-core/2.0.3/config/variant/2.2.2/settings.sh
+    export PATH=${ROSLIN_CORE_BIN_PATH}:$PATH
+    export TOIL_LSF_ARGS="-sla Haystack -S 1"
+fi
+
+# Reference newer gcc libraries if found
+if [ -d "/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64" ]; then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64
+fi
+
+# Load NVM and bash completion if found
+if [ -d "/opt/common/CentOS_6-dev/nvm/v0.33.9" ]; then
+    export NVM_DIR=/opt/common/CentOS_6-dev/nvm/v0.33.9
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
