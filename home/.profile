@@ -1,5 +1,5 @@
-# ~/.profile is executed by the command interpreter (e.g. bash) for login shells. It has the stuff
-# *not* specifically related to bash, such as environment variables (e.g. PATH, PERL5LIB, etc.)
+# ~/.profile: Executed by the command interpreter (e.g. bash) for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login exists.
 
 # Set umask so that your group members can help you with your work
 umask 002

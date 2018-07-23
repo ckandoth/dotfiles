@@ -3,10 +3,10 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-    *) return;;
+      *) return;;
 esac
 
-# Don't put duplicate lines or lines starting with space in the history.
+# Don't put duplicate lines or lines starting with space in the history
 HISTCONTROL=ignoreboth
 
 # Append to the history file, don't overwrite it
@@ -16,7 +16,7 @@ shopt -s histappend
 HISTSIZE=2000
 HISTFILESIZE=5120
 
-# Check the window size after each command, and update values of LINES and COLUMNS as needed
+# Check window size after each command to update LINES and COLUMNS as needed
 shopt -s checkwinsize
 
 # Make less more friendly for non-text input files, see lesspipe(1)
@@ -31,6 +31,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# Colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # Add some aliases for ls
 alias ll='ls -hlF'
 alias la='ls -A'
@@ -39,19 +42,12 @@ alias l='ls -CF'
 # An alias that helps view tab-delimited data
 alias lc="sed ':x s/\(^\|\t\)\t/\1 \t/; t x' | column -ts$'\t' | less -SFX"
 
-# Add an "alert" alias for long running commands. Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Pull more aliases from .bash_aliases if found
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# Enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Enable programmable completion features
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
         . /usr/share/bash-completion/bash_completion
@@ -112,14 +108,16 @@ if [ -d "$HOME/.bashrc.d" ]; then
     fi
 fi
 
-# Source the Homeshick scripts, and make sure all the castles are synced up
+# Source Homeshick scripts if found, and sync all the castles
 if [ -d "$HOME/.homesick/repos/homeshick" ]; then
     source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fi
 
-# Set PATH to include MSKCC's private bin if found
+# Set PATH to include tools under /opt/common if found
 if [ -d "/opt/common/CentOS_6-dev/bin/current" ]; then
     export PATH=/opt/common/CentOS_6-dev/bin/current:$PATH
+elif [ -d "/opt/common/bin" ]; then
+    export PATH=/opt/common/bin:$PATH
 fi
 
 # Set PATH to include MSKCC's python bin if found
@@ -130,7 +128,7 @@ fi
 # Configure Roslin, if its settings are found in the expected folders
 if [ -f "/ifs/work/pi/roslin-core/2.0.3/config/settings.sh" ]; then
     source /ifs/work/pi/roslin-core/2.0.3/config/settings.sh
-    source /ifs/work/pi/roslin-core/2.0.3/config/variant/2.2.2/settings.sh
+    source /ifs/work/pi/roslin-core/2.0.3/config/variant/2.3.0/settings.sh
     export PATH=${ROSLIN_CORE_BIN_PATH}:$PATH
     export TOIL_LSF_ARGS="-sla Haystack -S 1"
 fi
