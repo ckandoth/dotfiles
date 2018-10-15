@@ -76,10 +76,12 @@ export LESS=-eiMXR
 # Set umask so that your group members can help you with your work
 umask 002
 
-# Use /scratch/username instead of /tmp if /scratch disk is found
-if [ -d "/scratch" ]; then
+# Use /fscratch/username or /scratch/username as TMPDIR instead of /tmp
+if [ -d "/fscratch" ]; then
+    mkdir -p /fscratch/$USER
+    export TMPDIR=/fscratch/$USER
+elif [ -d "/scratch" ]; then
     mkdir -p /scratch/$USER
-    export TMP=/scratch/$USER
     export TMPDIR=/scratch/$USER
 fi
 
@@ -114,28 +116,20 @@ if [ -d "$HOME/.homesick/repos/homeshick" ]; then
 fi
 
 # Set PATH to include tools under /opt/common if found
-if [ -d "/opt/common/CentOS_6-dev/bin/current" ]; then
-    export PATH=/opt/common/CentOS_6-dev/bin/current:$PATH
+kernel=`uname -r`
+if [[ $kernel == 3* && -d "/opt/common/CentOS_7-dev/bin" ]]; then
+    export PATH=/opt/common/CentOS_7-dev/bin:/opt/common/CentOS_6-dev/bin/current:/opt/common/CentOS_6-dev/python/python-2.7.10/bin:$PATH
+elif [[ $kernel == 2* && -d "/opt/common/CentOS_6-dev/bin/current" ]]; then
+    export PATH=/opt/common/CentOS_6-dev/bin/current:/opt/common/CentOS_6-dev/python/python-2.7.10/bin:$PATH
 elif [ -d "/opt/common/bin" ]; then
     export PATH=/opt/common/bin:$PATH
 fi
 
-# Set PATH to include MSKCC's python bin if found
-if [ -d "/opt/common/CentOS_6-dev/python/python-2.7.10/bin" ]; then
-    export PATH=/opt/common/CentOS_6-dev/python/python-2.7.10/bin:$PATH
-fi
-
-# Configure Roslin, if its settings are found in the expected folders
-if [ -f "/ifs/work/pi/roslin-core/2.0.3/config/settings.sh" ]; then
-    source /ifs/work/pi/roslin-core/2.0.3/config/settings.sh
-    source /ifs/work/pi/roslin-core/2.0.3/config/variant/2.3.0/settings.sh
-    export PATH=${ROSLIN_CORE_BIN_PATH}:$PATH
-    export TOIL_LSF_ARGS="-sla Haystack -S 1"
-fi
-
-# Reference newer gcc libraries if found
-if [ -d "/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64" ]; then
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/common/CentOS_6/gcc/gcc-4.9.3/lib64
+# Set PATH to include Roslin scripts from the latest roslin-core
+if [ -d "/ifs/work/pi/roslin-core/2.0.5/bin" ]; then
+    export PATH=/ifs/work/pi/roslin-core/2.0.5/bin:$PATH
+    source /ifs/work/pi/roslin-core/2.0.5/config/settings.sh
+    export TOIL_LSF_ARGS="-S 1"
 fi
 
 # Load NVM and bash completion if found
