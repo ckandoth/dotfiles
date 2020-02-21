@@ -1,7 +1,3 @@
-" To make this file do stuff, add something like the following (without the
-" leading ") to your ~/.vimrc:
-" au BufNewFile,BufRead *.yaml,*.yml so ~/src/PyYaml/YAML.vim
-
 " Vim syntax/macro file
 " Language:	YAML
 " Author:	Igor Vergeichik <iverg@mail.ru>
