@@ -86,7 +86,7 @@ if [ -d "$HOME/.bashrc.d" ]; then
     load_dir $HOME/.bashrc.d
 
     # Intuitive color schemes for git repositories
-    if [ $(__git_ps1) ]; then
+    if [ -v $(__git_ps1) ]; then
         BLUE="\[\e[38;5;39m\]";
         ORANGE="\[\e[38;5;208m\]";
         YELLOW="\[\e[33m\]";
