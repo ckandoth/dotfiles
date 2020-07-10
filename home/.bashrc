@@ -97,5 +97,10 @@ fi
 
 # Source Homeshick scripts if found, and sync all the castles
 if [ -d "$HOME/.homesick/repos/homeshick" ]; then
-    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+    . $HOME/.homesick/repos/homeshick/homeshick.sh
+fi
+
+# Add miniconda to PATH if found
+if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+    . $HOME/miniconda3/etc/profile.d/conda.sh
 fi
