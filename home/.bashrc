@@ -47,6 +47,7 @@ alias lc="sed ':x s/\(^\|\t\)\t/\1 \t/; t x' | column -ts$'\t' | less -SFX"
 
 # Enable color support for ls and grep using aliases
 if [ -x /usr/bin/dircolors ]; then
+    force_color_prompt=yes
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
