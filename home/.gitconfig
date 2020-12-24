@@ -1,6 +1,7 @@
 [user]
     name = Cyriac Kandoth
     email = ckandoth@gmail.com
+    signingkey = AA0605139C7E8B0B
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
