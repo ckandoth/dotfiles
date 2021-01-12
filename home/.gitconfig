@@ -2,6 +2,10 @@
     name = Cyriac Kandoth
     email = ckandoth@gmail.com
     signingkey = AA0605139C7E8B0B
+[commit]
+    gpgsign = true
+[credential]
+    helper = cache --timeout=10800
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
@@ -52,5 +56,3 @@
     lt = describe --tags --abbrev=0
     ours = "!f() { git co --ours $@ && git add $@; }; f"
     theirs = "!f() { git co --theirs $@ && git add $@; }; f"
-[credential]
-    helper = cache --timeout=10800
