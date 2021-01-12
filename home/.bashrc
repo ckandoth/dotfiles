@@ -71,6 +71,9 @@ set -o ignoreeof
 # This prevents me from accidentally overwriting a file with I/O redirects
 set -o noclobber
 
+# This allows gpg to properly prompt me for a passphrase
+export GPG_TTY="$(tty)"
+
 # A function that sources all .sh files within a given directory
 function load_dir {
     LOAD_DIR=${1}
