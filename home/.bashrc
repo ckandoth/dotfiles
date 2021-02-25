@@ -104,7 +104,7 @@ if [ -d "$HOME/.homesick/repos/homeshick" ]; then
     . $HOME/.homesick/repos/homeshick/homeshick.sh
 fi
 
-# Add miniconda to PATH if found
-if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-    . $HOME/miniconda3/etc/profile.d/conda.sh
+# Add mambaforge to PATH if found
+if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
+    . $HOME/mambaforge/etc/profile.d/conda.sh
 fi
