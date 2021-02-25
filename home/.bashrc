@@ -108,3 +108,9 @@ fi
 if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
     . $HOME/mambaforge/etc/profile.d/conda.sh
 fi
+
+# If a private key is found and keychain is installed
+if [ -f "$HOME/.ssh/id_ed25519" -a -x "$(command -v keychain)" ]; then
+    /usr/bin/keychain --quiet --nogui $HOME/.ssh/id_ed25519
+    source $HOME/.keychain/$HOSTNAME-sh
+fi
