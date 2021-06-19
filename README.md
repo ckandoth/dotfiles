@@ -8,11 +8,11 @@ Quick Start
 
 To install homeshick into a fresh *nix home directory:
 
-    git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
+    git clone git@github.com:andsens/homeshick.git $HOME/.homesick/repos/homeshick
 
 Use homeshick to clone and symlink my dotfiles from this repo:
 
-    $HOME/.homesick/repos/homeshick/bin/homeshick clone -f ckandoth/dotfiles
+    $HOME/.homesick/repos/homeshick/bin/homeshick clone -f git@github.com:ckandoth/dotfiles.git
 
 This should prompt to replace all existing dotfiles including `.bashrc` which is already set to source homeshick. But rather than restarting terminal, simply get the homeshick alias running like so:
 

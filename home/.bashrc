@@ -109,9 +109,10 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH=$HOME/.local/bin:$PATH
 fi
 
-# Add mambaforge to PATH if found
+# Add mambaforge to PATH if found, and load the base environment
 if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
     . $HOME/mambaforge/etc/profile.d/conda.sh
+    conda activate
 fi
 
 # If a private key is found and keychain is installed
