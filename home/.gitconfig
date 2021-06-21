@@ -23,6 +23,8 @@
     editor = vim
 [receive]
     denyNonFastForwards = 0
+[pull]
+    ff = only
 [push]
     default = simple
 [alias]
