@@ -58,3 +58,5 @@
     lt = describe --tags --abbrev=0
     ours = "!f() { git co --ours $@ && git add $@; }; f"
     theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+[init]
+	defaultBranch = main
