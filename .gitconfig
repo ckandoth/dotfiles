@@ -1,0 +1,62 @@
+[user]
+    name = Cyriac Kandoth
+    email = ckandoth@gmail.com
+    signingkey = AA0605139C7E8B0B
+[commit]
+    gpgsign = true
+[credential]
+    helper = cache --timeout=10800
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[color]
+    status = auto
+    diff = auto
+    branch = auto
+    interactive = auto
+[merge]
+    renameLimit = 10000
+[core]
+    preloadindex = 1
+    editor = vim
+[receive]
+    denyNonFastForwards = 0
+[pull]
+    ff = only
+[push]
+    default = simple
+[alias]
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    ci = commit
+    co = checkout
+    br = branch 
+    diff = diff --word-diff
+    dc = diff --cached    
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    le = log --oneline --decorate
+    filelog = log -u
+    fl = log -u
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+    dr = "!f() { git diff "$1"^.."$1"; }; f"
+    lc = "!f() { git ll "$1"^.."$1"; }; f"
+    diffr = "!f() { git diff "$1"^.."$1"; }; f"
+    f = "!git ls-files | grep -i"
+    grep = grep -Ii
+    gr = grep -Ii
+    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+    la = "!git config -l | grep alias | cut -c 7-"
+    lasttag = describe --tags --abbrev=0
+    lt = describe --tags --abbrev=0
+    ours = "!f() { git co --ours $@ && git add $@; }; f"
+    theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+[init]
+    defaultBranch = main
