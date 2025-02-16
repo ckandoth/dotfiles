@@ -1,11 +1,16 @@
-### To set up a new Linux dev machine
+### To set up a new Debian-based dev machine
 
-Install some utilities I like using the appropriate package manager.
+Install some useful utilities.
 
 ```bash
-sudo apt install -y git-core vim tree curl tmux parallel keychain
-sudo dnf install -y git-core vim tree curl tmux
-sudo zypper install -y git-core vim tree curl tmux gnu_parallel keychain
+sudo apt install -y git vim tree curl tmux parallel keychain
+```
+
+Install Azure CLI using Microsoft repos.
+
+```bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+az config set extension.use_dynamic_install=yes_without_prompt
 ```
 
 Create an ed25519 key for SSH with a passphrase.
@@ -24,7 +29,7 @@ dotfiles checkout --force
 exit
 ```
 
-Log back, install conda with libmamba solver, and logout.
+Log back in, install conda with libmamba solver, and logout.
 
 ```bash
 curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
