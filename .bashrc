@@ -95,8 +95,8 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
     . $HOME/miniconda3/etc/profile.d/conda.sh
 fi
 
-# If a private key is found and keychain is installed, load it up for passwordless SSH
-if [ -f "$HOME/.ssh/id_ed25519" -a -x "$(command -v keychain)" ]; then
-    /usr/bin/keychain --quiet --nogui $HOME/.ssh/id_ed25519
-    source $HOME/.keychain/$HOSTNAME-sh
+# If a private key is found and ssh-agent is installed, load it up for passwordless SSH
+if [ -f "$HOME/.ssh/id_ed25519" -a -x "$(command -v ssh-agent)" ]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    ssh-add $HOME/.ssh/id_ed25519
 fi
