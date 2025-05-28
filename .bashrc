@@ -98,5 +98,7 @@ fi
 # If a private key is found and ssh-agent is installed, load it up for passwordless SSH
 if [ -f "$HOME/.ssh/id_ed25519" -a -x "$(command -v ssh-agent)" ]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-    ssh-add $HOME/.ssh/id_ed25519
+    if ! ssh-add -l > /dev/null 2>&1; then
+        ssh-add "$HOME/.ssh/id_ed25519"
+    fi
 fi
