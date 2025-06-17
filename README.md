@@ -10,7 +10,7 @@ sudo zypper install -y git vim tree curl tmux gnu_parallel
 Create an ed25519 key for SSH with a passphrase.
 
 ```bash
-ssh-keygen -t ed25519 -C $USER -f .ssh/id_ed25519
+ssh-keygen -t ed25519 -f .ssh/id_ed25519
 ```
 
 Deploy the dotfiles in this repo, enable the SSH agent, and logout.
