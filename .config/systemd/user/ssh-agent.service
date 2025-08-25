@@ -2,9 +2,9 @@
 Description=SSH key agent
 
 [Service]
-Type=forking
-Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
-ExecStart=/usr/bin/ssh-agent -a $SSH_AUTH_SOCK
+Type=exec
+ExecStart=/usr/bin/ssh-agent -a %t/ssh-agent.socket
+RemainAfterExit=yes
 
 [Install]
 WantedBy=default.target
