@@ -96,9 +96,9 @@ if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
 fi
 
 # If a private key is found and ssh-agent is installed, load it up for passwordless SSH
-if [ -f "$HOME/.ssh/id_ed25519" -a -x "$(command -v ssh-agent)" ]; then
+if [ -f "$HOME/.ssh/id_ed25519" ] && command -v ssh-agent >/dev/null; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-    if ! ssh-add -l > /dev/null 2>&1; then
+    if ! ssh-add -l | grep -q ED25519; then
         ssh-add "$HOME/.ssh/id_ed25519"
     fi
 fi
