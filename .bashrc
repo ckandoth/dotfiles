@@ -90,9 +90,9 @@ YELLOW="\[\e[33m\]";
 WHITE="\[\e[0m\]";
 export PS1=$BLUE'\u'$WHITE'@'$ORANGE'\H '$YELLOW'\W'$WHITE'$ '
 
-# Add conda to PATH if found
-if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-    . $HOME/miniconda3/etc/profile.d/conda.sh
+# Add pixi to PATH if found
+if [ -d "$HOME/.pixi/bin" ]; then
+    export PATH="$HOME/.pixi/bin:$PATH"
 fi
 
 # If a private key is found and ssh-agent is installed, load it up for passwordless SSH
