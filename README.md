@@ -7,6 +7,12 @@ sudo apt install -y git vim tree curl tmux parallel
 sudo zypper install -y git vim tree curl tmux gnu_parallel
 ```
 
+Install `pixi` to help manage conda environments and packages.
+
+```bash
+curl -fsSL https://pixi.sh/install.sh | sh
+```
+
 Create an ed25519 key for SSH with a passphrase.
 
 ```bash
