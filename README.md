@@ -4,6 +4,7 @@ Install some useful utilities using the appropriate package manager.
 
 ```bash
 sudo apt install -y git vim tree curl tmux parallel
+sudo pacman -S git vim tree curl tmux parallel
 sudo zypper install -y git vim tree curl tmux gnu_parallel
 ```
 
