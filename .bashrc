@@ -94,11 +94,3 @@ export PS1=$BLUE'\u'$WHITE'@'$ORANGE'\H '$YELLOW'\W'$WHITE'$ '
 if [ -d "$HOME/.pixi/bin" ]; then
     export PATH="$HOME/.pixi/bin:$PATH"
 fi
-
-# If a private key is found and ssh-agent is installed, load it up for passwordless SSH
-if [ -f "$HOME/.ssh/id_ed25519" ] && command -v ssh-agent >/dev/null; then
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-    if ! ssh-add -l | grep -q ED25519; then
-        ssh-add "$HOME/.ssh/id_ed25519"
-    fi
-fi
