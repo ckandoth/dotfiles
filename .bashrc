@@ -89,7 +89,12 @@ YELLOW="\[\e[33m\]";
 WHITE="\[\e[0m\]";
 export PS1=$BLUE'\u'$WHITE'@'$ORANGE'\H '$YELLOW'\W'$WHITE'$ '
 
-# Add pixi to PATH if found
-if [ -d "$HOME/.pixi/bin" ]; then
-    export PATH="$HOME/.pixi/bin:$PATH"
+# Add ~/.pixi/bin to PATH if found
+if [ -d "$HOME/.pixi/bin" ] && [[ ":$PATH:" != *":$HOME/.pixi/bin:"* ]]; then
+   export PATH="$PATH:$HOME/.pixi/bin"
+fi
+
+# Add ~/.local/bin to PATH if found
+if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+  export PATH="$PATH:$HOME/.local/bin"
 fi
